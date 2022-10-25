@@ -30,19 +30,21 @@ public class BagLinterTest extends PrivateConstructorTest{
   
   @Test
   public void testLintBag() throws Exception{
-    Set<BagitWarning> expectedWarnings = new HashSet<>();
-    expectedWarnings.addAll(Arrays.asList(BagitWarning.values()));
+    Set<BagitWarning> expectedWarnings = new HashSet<>(Arrays.asList(BagitWarning.values()));
+    Set<BagitWarning> ignoredWarnings = new HashSet<>();
     expectedWarnings.remove(BagitWarning.MANIFEST_SETS_DIFFER); //only applies to version 1.0 but need older version for other warnings, so we test this separately
-    Set<BagitWarning> warnings = BagLinter.lintBag(rootDir);
 
-    if(FileSystems.getDefault().getClass().getName() == "sun.nio.fs.MacOSXFileSystem"){
+    if(FileSystems.getDefault().getClass().getName().equals("sun.nio.fs.MacOSXFileSystem")){
+      ignoredWarnings.add(BagitWarning.DIFFERENT_NORMALIZATION);
       expectedWarnings.remove(BagitWarning.DIFFERENT_NORMALIZATION); //don't test normalization on mac
     }
-    
+
+    Set<BagitWarning> warnings = BagLinter.lintBag(rootDir, ignoredWarnings);
+
     Set<BagitWarning> diff = new HashSet<>(expectedWarnings);
     diff.removeAll(warnings);
     
-    Assertions.assertEquals(expectedWarnings, warnings, "Warnings missing: " + diff.toString() + "\n");
+    Assertions.assertEquals(expectedWarnings, warnings, "Warnings missing: " + diff + "\n");
   }
   
   @Test

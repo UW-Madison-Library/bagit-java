@@ -2,6 +2,7 @@ package gov.loc.repository.bagit.writer;
 
 import java.nio.file.Path;
 
+import gov.loc.repository.bagit.domain.Version;
 import gov.loc.repository.bagit.util.PathUtils;
 
 /**
@@ -21,8 +22,8 @@ public final class RelativePathWriter {
    * 
    * @return the relative path with only unix path separator
    */
-  public static String formatRelativePathString(final Path relativeTo, final Path entry){
-    final String encodedPath = PathUtils.encodeFilename(relativeTo.toAbsolutePath().relativize(entry.toAbsolutePath()));
+  public static String formatRelativePathString(final Path relativeTo, final Path entry, final Version version){
+    final String encodedPath = PathUtils.encodeFilename(relativeTo.toAbsolutePath().relativize(entry.toAbsolutePath()), version);
     return encodedPath.replace('\\', '/') + System.lineSeparator();
   }
 }

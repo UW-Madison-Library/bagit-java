@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import gov.loc.repository.bagit.domain.Version;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledOnOs;
@@ -37,14 +38,14 @@ public class ManifestReaderTest extends PrivateConstructorTest {
   public void testReadUpDirectoryMaliciousManifestThrowsException() throws Exception{
     Path manifestFile = Paths.get(getClass().getClassLoader().getResource("maliciousManifestFile/upAdirectoryReference.txt").toURI());
     Assertions.assertThrows(MaliciousPathException.class, 
-        () -> { ManifestReader.readChecksumFileMap(manifestFile, Paths.get("/foo"), StandardCharsets.UTF_8); });
+        () -> { ManifestReader.readChecksumFileMap(manifestFile, Paths.get("/foo"), StandardCharsets.UTF_8, Version.VERSION_0_97); });
   }
   
   @Test
   public void testReadTildeMaliciousManifestThrowsException() throws Exception{
     Path manifestFile = Paths.get(getClass().getClassLoader().getResource("maliciousManifestFile/tildeReference.txt").toURI());
     Assertions.assertThrows(MaliciousPathException.class, 
-        () -> { ManifestReader.readChecksumFileMap(manifestFile, Paths.get("/foo"), StandardCharsets.UTF_8); });
+        () -> { ManifestReader.readChecksumFileMap(manifestFile, Paths.get("/foo"), StandardCharsets.UTF_8, Version.VERSION_0_97); });
   }
   
   @Test
@@ -52,13 +53,13 @@ public class ManifestReaderTest extends PrivateConstructorTest {
   public void testReadFileUrlMaliciousManifestThrowsException() throws Exception{
     Path manifestFile = Paths.get(getClass().getClassLoader().getResource("maliciousManifestFile/fileUrl.txt").toURI());
     Assertions.assertThrows(MaliciousPathException.class, 
-        () -> {  ManifestReader.readChecksumFileMap(manifestFile, Paths.get("/bar"), StandardCharsets.UTF_8); });
+        () -> {  ManifestReader.readChecksumFileMap(manifestFile, Paths.get("/bar"), StandardCharsets.UTF_8, Version.VERSION_0_97); });
   }
   
   @Test
   public void testReadWindowsSpecialDirMaliciousManifestThrowsException() throws Exception{
     Path manifestFile = Paths.get(getClass().getClassLoader().getResource("maliciousManifestFile/windowsSpecialDirectoryName.txt").toURI());
     Assertions.assertThrows(InvalidBagitFileFormatException.class, 
-        () -> { ManifestReader.readChecksumFileMap(manifestFile, Paths.get("/foo"), StandardCharsets.UTF_8); });
+        () -> { ManifestReader.readChecksumFileMap(manifestFile, Paths.get("/foo"), StandardCharsets.UTF_8, Version.VERSION_0_97); });
   }
 }

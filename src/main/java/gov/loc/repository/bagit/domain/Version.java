@@ -6,10 +6,23 @@ import java.util.Objects;
  * The version of the bagit specification used to create the bag.
  */
 public final class Version implements Comparable<Version>{
+  public final static Version VERSION_1_0 = new Version(1, 0);
+  public final static Version VERSION_0_97 = new Version(0, 97);
+  public final static Version VERSION_0_95 = new Version(0, 95);
+  public final static Version VERSION_0_93 = new Version(0, 93);
+
   public final int major;
   public final int minor;
   
   private transient final String cachedToString;
+
+  public static Version getVersion(final int major, final int minor) {
+    if (major == 1 && minor == 0) return VERSION_1_0;
+    else if (major == 0 && minor == 97) return VERSION_0_97;
+    else if (major == 0 && minor == 95) return VERSION_0_95;
+    else if (major == 0 && minor == 93) return VERSION_0_93;
+    else return new Version(major, minor);
+  }
   
   public Version(final int major, final int minor){
     this.major = major;
@@ -18,7 +31,7 @@ public final class Version implements Comparable<Version>{
   }
   
   public static Version LATEST_BAGIT_VERSION() {
-    return new Version(1, 0);
+    return VERSION_1_0;
   }
 
   @Override

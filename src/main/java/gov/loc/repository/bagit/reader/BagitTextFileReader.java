@@ -124,6 +124,6 @@ public final class BagitTextFileReader {
     final int major = Integer.parseInt(parts[0]);
     final int minor = Integer.parseInt(parts[1]);
     
-    return new Version(major, minor);
+    return Version.getVersion(major, minor);
   }
 }

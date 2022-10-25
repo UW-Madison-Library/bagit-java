@@ -175,7 +175,7 @@ public final class BagCreator {
   private static void createPayloadManifests(final Bag bag, final Collection<SupportedAlgorithm> algorithms, final boolean includeHidden) throws NoSuchAlgorithmException, IOException{
     final Map<Manifest, MessageDigest> payloadFilesMap = calculatePayloadManifests(bag, algorithms, includeHidden);
     bag.getPayLoadManifests().addAll(payloadFilesMap.keySet());
-    ManifestWriter.writePayloadManifests(bag.getPayLoadManifests(), PathUtils.getBagitDir(bag), bag.getRootDir(), bag.getFileEncoding());
+    ManifestWriter.writePayloadManifests(bag.getPayLoadManifests(), PathUtils.getBagitDir(bag), bag.getRootDir(), bag.getFileEncoding(), bag.getVersion());
   }
   
   private static void createMetadataFile(final Bag bag, final Metadata metadata) throws IOException{
@@ -205,6 +205,6 @@ public final class BagCreator {
     final Map<Manifest, MessageDigest> tagFilesMap = calculateTagManifests(bag, algorithms, includeHidden);
     
     bag.getTagManifests().addAll(tagFilesMap.keySet());
-    ManifestWriter.writeTagManifests(bag.getTagManifests(), PathUtils.getBagitDir(bag), bag.getRootDir(), bag.getFileEncoding());
+    ManifestWriter.writeTagManifests(bag.getTagManifests(), PathUtils.getBagitDir(bag), bag.getRootDir(), bag.getFileEncoding(), bag.getVersion());
   }
 }

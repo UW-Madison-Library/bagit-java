@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import gov.loc.repository.bagit.domain.Version;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,11 +57,11 @@ public final class ManifestReader {
         
         if(filename.startsWith("tagmanifest-")){
           logger.debug(messages.getString("found_tagmanifest"), path);
-          bag.getTagManifests().add(readManifest(nameMapping, path, bag.getRootDir(), bag.getFileEncoding()));
+          bag.getTagManifests().add(readManifest(nameMapping, path, bag.getRootDir(), bag.getFileEncoding(), bag.getVersion()));
         }
         else if(filename.startsWith("manifest-")){
           logger.debug(messages.getString("found_payload_manifest"), path);
-          bag.getPayLoadManifests().add(readManifest(nameMapping, path, bag.getRootDir(), bag.getFileEncoding()));
+          bag.getPayLoadManifests().add(readManifest(nameMapping, path, bag.getRootDir(), bag.getFileEncoding(), bag.getVersion()));
         }
       }
     }
@@ -97,7 +98,7 @@ public final class ManifestReader {
    * @throws InvalidBagitFileFormatException if the manifest is not formatted properly
    */
   public static Manifest readManifest(final BagitAlgorithmNameToSupportedAlgorithmMapping nameMapping, 
-      final Path manifestFile, final Path bagRootDir, final Charset charset) 
+      final Path manifestFile, final Path bagRootDir, final Charset charset, final Version version)
           throws IOException, MaliciousPathException, UnsupportedAlgorithmException, InvalidBagitFileFormatException{
     logger.debug(messages.getString("reading_manifest"), manifestFile);
     final String alg = PathUtils.getFilename(manifestFile).split("[-\\.]")[1];
@@ -105,8 +106,8 @@ public final class ManifestReader {
     
     final Manifest manifest = new Manifest(algorithm);
     
-    final Map<Path, String> filetToChecksumMap = readChecksumFileMap(manifestFile, bagRootDir, charset);
-    manifest.setFileToChecksumMap(filetToChecksumMap);
+    final Map<Path, String> fileToChecksumMap = readChecksumFileMap(manifestFile, bagRootDir, charset, version);
+    manifest.setFileToChecksumMap(fileToChecksumMap);
     
     return manifest;
   }
@@ -114,13 +115,13 @@ public final class ManifestReader {
   /*
    * read the manifest file into a map of files and checksums
    */
-  static Map<Path, String> readChecksumFileMap(final Path manifestFile, final Path bagRootDir, final Charset charset) throws IOException, MaliciousPathException, InvalidBagitFileFormatException{
+  static Map<Path, String> readChecksumFileMap(final Path manifestFile, final Path bagRootDir, final Charset charset, final Version version) throws IOException, MaliciousPathException, InvalidBagitFileFormatException{
     final HashMap<Path, String> map = new HashMap<>();
     try(final BufferedReader br = Files.newBufferedReader(manifestFile, charset)){
       String line = br.readLine();
       while(line != null){
         final String[] parts = line.split("\\s+", 2);
-        final Path file = TagFileReader.createFileFromManifest(bagRootDir, parts[1]);
+        final Path file = TagFileReader.createFileFromManifest(bagRootDir, parts[1], version);
         logger.debug("Read checksum [{}] and file [{}] from manifest [{}]", parts[0], file, manifestFile);
         map.put(file, parts[0]);
         line = br.readLine();

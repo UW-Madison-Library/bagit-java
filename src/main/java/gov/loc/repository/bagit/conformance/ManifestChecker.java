@@ -43,8 +43,7 @@ public final class ManifestChecker {
   private static final String TRASHES_FILE = "\\.(_.)?[Tt][Rr][Aa][Ss][Hh][Ee][Ss]";
   private static final String FS_EVENTS_FILE = "\\.[Ff][Ss][Ee][Vv][Ee][Nn][Tt][Ss][Dd]";
   private static final String OS_FILES_REGEX = ".*data/(" + THUMBS_DB_FILE + "|" + DS_STORE_FILE + "|" + SPOTLIGHT_FILE + "|" + TRASHES_FILE + "|" + FS_EVENTS_FILE + ")";
-  private static final Version VERSION_1_0 = new Version(1,0);
-  
+
   private ManifestChecker(){
     //intentionally left empty
   }
@@ -263,29 +262,29 @@ public final class ManifestChecker {
   }
   
   static void checkManifestSets(final Version version, final List<Path> tagManifests, final List<Path> payloadManifests, 
-      final Set<BagitWarning> warnings, final Charset encoding) 
+      final Set<BagitWarning> warnings, final Charset encoding)
           throws IOException, MaliciousPathException, UnsupportedAlgorithmException, InvalidBagitFileFormatException{
   //edge case, for version 1.0+ all tag manifests SHOULD list the same set of files
-    if(tagManifests.size() > 1 && VERSION_1_0.isSameOrOlder(version)){
-      checkManifestsListSameSetOfFiles(warnings, tagManifests, encoding);
+    if(tagManifests.size() > 1 && Version.VERSION_1_0.isSameOrOlder(version)){
+      checkManifestsListSameSetOfFiles(warnings, tagManifests, encoding, version);
     }
     
     //edge case, for version 1.0+ all payload manifests SHOULD list the same set of files
-    if(payloadManifests.size() > 1 && VERSION_1_0.isSameOrOlder(version)){
-      checkManifestsListSameSetOfFiles(warnings, payloadManifests, encoding);
+    if(payloadManifests.size() > 1 && Version.VERSION_1_0.isSameOrOlder(version)){
+      checkManifestsListSameSetOfFiles(warnings, payloadManifests, encoding, version);
     }
   }
   
   //starting with version 1.0 all manifest types (tag, payload) should list the same set of files
   @SuppressWarnings("PMD.EmptyCatchBlock")
-  static void checkManifestsListSameSetOfFiles(final Set<BagitWarning> warnings, final List<Path> manifestPaths, final Charset charset) throws IOException, MaliciousPathException, UnsupportedAlgorithmException, InvalidBagitFileFormatException{
+  static void checkManifestsListSameSetOfFiles(final Set<BagitWarning> warnings, final List<Path> manifestPaths, final Charset charset, final Version version) throws IOException, MaliciousPathException, UnsupportedAlgorithmException, InvalidBagitFileFormatException{
     final StandardBagitAlgorithmNameToSupportedAlgorithmMapping nameMapping = new StandardBagitAlgorithmNameToSupportedAlgorithmMapping();
     
     Manifest compareToManifest = null;
     Path compareToManifestPath = null;
     for (final Path manifestPath : manifestPaths) {
       try {
-        final Manifest manifest = ManifestReader.readManifest(nameMapping, manifestPath, manifestPath.getParent(), charset);
+        final Manifest manifest = ManifestReader.readManifest(nameMapping, manifestPath, manifestPath.getParent(), charset, version);
         if(compareToManifest == null) {
           compareToManifestPath = manifestPath;
           compareToManifest = manifest;

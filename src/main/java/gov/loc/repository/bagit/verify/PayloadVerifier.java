@@ -123,8 +123,7 @@ public class PayloadVerifier implements AutoCloseable{
         final String filename = PathUtils.getFilename(path);
         if (filename.startsWith("tagmanifest-") || filename.startsWith("manifest-")) {
           logger.debug(messages.getString("get_listing_in_manifest"), path);
-          final Manifest manifest = ManifestReader.readManifest(nameMapping, path, bag.getRootDir(),
-              bag.getFileEncoding());
+          final Manifest manifest = ManifestReader.readManifest(nameMapping, path, bag.getRootDir(), bag.getFileEncoding(), bag.getVersion());
           filesListedInManifests.addAll(manifest.getFileToChecksumMap().keySet());
         }
       }

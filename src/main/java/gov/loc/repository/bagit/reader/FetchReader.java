@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import gov.loc.repository.bagit.domain.Version;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,7 +43,7 @@ public final class FetchReader {
    * @throws InvalidBagitFileFormatException if the fetch format does not follow the bagit specification
    */
   @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-  public static List<FetchItem> readFetch(final Path fetchFile, final Charset encoding, final Path bagRootDir) throws IOException, MaliciousPathException, InvalidBagitFileFormatException{
+  public static List<FetchItem> readFetch(final Path fetchFile, final Charset encoding, final Path bagRootDir, final Version version) throws IOException, MaliciousPathException, InvalidBagitFileFormatException{
     logger.info(messages.getString("reading_fetch_file"), fetchFile);
     final List<FetchItem> itemsToFetch = new ArrayList<>();
     
@@ -54,7 +55,7 @@ public final class FetchReader {
       while(line != null){
         if(line.matches(FETCH_LINE_REGEX) && !line.matches("\\s*")){
           parts = line.split("\\s+", 3);
-          final Path path = TagFileReader.createFileFromManifest(bagRootDir, parts[2]);
+          final Path path = TagFileReader.createFileFromManifest(bagRootDir, parts[2], version);
           length = parts[1].equals("-") ? -1 : Long.decode(parts[1]);
           url = new URL(parts[0]);
           

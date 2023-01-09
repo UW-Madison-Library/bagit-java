@@ -39,6 +39,12 @@ public class PathUtilsTest extends PrivateConstructorTest {
     expectedDecoded = "/foo/bar/ham\r\n";
     actualDecoded = PathUtils.decodeFilename(testString, Version.VERSION_0_97);
     Assertions.assertEquals(expectedDecoded, actualDecoded);
+
+    // version 1.0 encodes % as well
+    testString = "foo%253Abar";
+    expectedDecoded = "foo%3Abar";
+    actualDecoded = PathUtils.decodeFilename(testString, Version.VERSION_1_0);
+    Assertions.assertEquals(expectedDecoded, actualDecoded);
   }
   
   @Test
@@ -60,6 +66,12 @@ public class PathUtilsTest extends PrivateConstructorTest {
       testPath = Paths.get("foo/bar/ham\r\n");
       expectedEncoded = "foo/bar/ham%0D%0A";
       actualEncoded = PathUtils.encodeFilename(testPath, Version.VERSION_0_97);
+      Assertions.assertEquals(expectedEncoded, actualEncoded);
+
+      // 1.0 encodes %
+      testPath = Paths.get("foo%3Abar");
+      expectedEncoded = "foo%253Abar";
+      actualEncoded = PathUtils.encodeFilename(testPath, Version.VERSION_1_0);
       Assertions.assertEquals(expectedEncoded, actualEncoded);
     }
   }

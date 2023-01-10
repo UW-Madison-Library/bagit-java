@@ -43,7 +43,8 @@ public final class PathUtils {
   /**
    * as per https://github.com/jkunze/bagitspec/commit/152d42f6298b31a4916ea3f8f644ca4490494070 decode percent encoded filenames
    * @param encoded the encoded filename
-   * @return the decoded filename 
+   * @param version the bagit version to conform to
+   * @return the decoded filename
    */
   public static String decodeFilename(final String encoded, final Version version){
     String decodedPath = encoded.replaceAll("%0A", "\n").replaceAll("%0D", "\r");
@@ -56,6 +57,7 @@ public final class PathUtils {
   /**
    * as per https://github.com/jkunze/bagitspec/commit/152d42f6298b31a4916ea3f8f644ca4490494070 encode any new lines or carriage returns
    * @param path the path to encode
+   * @param version the bagit version to conform to
    * @return the encoded filename
    */
   public static String encodeFilename(final Path path, final Version version){

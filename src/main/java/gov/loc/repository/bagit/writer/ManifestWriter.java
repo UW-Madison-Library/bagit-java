@@ -33,7 +33,8 @@ public final class ManifestWriter{
    * @param outputDir the root of where the manifest is being written to
    * @param bagitRootDir the path to the root of the bag
    * @param charsetName the name of the encoding for the file
-   * 
+   * @param version the bagit version to conform to
+   *
    * @throws IOException if there was a problem writing a file
    */
   public static void writePayloadManifests(final Set<Manifest> manifests, final Path outputDir, final Path bagitRootDir, final Charset charsetName, final Version version) throws IOException{
@@ -48,7 +49,8 @@ public final class ManifestWriter{
    * @param outputDir the root of where the manifest is being written to
    * @param bagitRootDir the path to the root of the bag
    * @param charsetName the name of the encoding for the file
-   * 
+   * @param version the bagit version to conform to
+   *
    * @throws IOException if there was a problem writing a file
    */
   public static void writeTagManifests(final Set<Manifest> tagManifests, final Path outputDir, final Path bagitRootDir, final Charset charsetName, final Version version) throws IOException{

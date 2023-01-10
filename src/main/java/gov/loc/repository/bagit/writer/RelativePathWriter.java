@@ -19,7 +19,8 @@ public final class RelativePathWriter {
    * 
    * @param relativeTo the path to remove from the entry
    * @param entry the path to make relative
-   * 
+   * @param version the bagit version to conform to
+   *
    * @return the relative path with only unix path separator
    */
   public static String formatRelativePathString(final Path relativeTo, final Path entry, final Version version){

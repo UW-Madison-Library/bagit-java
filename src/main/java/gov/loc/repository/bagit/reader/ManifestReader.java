@@ -90,6 +90,7 @@ public final class ManifestReader {
    * @param manifestFile a specific manifest file
    * @param bagRootDir the root directory of the bag
    * @param charset the encoding to use when reading the manifest file
+   * @param version the bagit version to conform to
    * @return the converted manifest object from the file
    * 
    * @throws IOException if there is a problem reading a file

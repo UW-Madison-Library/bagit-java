@@ -36,6 +36,7 @@ public final class FetchReader {
    * @param fetchFile the specific fetch file
    * @param encoding the encoding to read the file with
    * @param bagRootDir the root directory of the bag
+   * @param version the bagit version to conform to
    * @return a list of items to fetch
    * 
    * @throws IOException if there is a problem reading a file

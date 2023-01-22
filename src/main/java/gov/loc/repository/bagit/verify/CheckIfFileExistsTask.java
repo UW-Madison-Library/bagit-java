@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 @SuppressWarnings(value = {"PMD.DoNotUseThreads"})
 public class CheckIfFileExistsTask implements Runnable {
   private static final Logger logger = LoggerFactory.getLogger(CheckIfFileExistsTask.class);
-  private static final ResourceBundle messages = ResourceBundle.getBundle("MessageBundle");
+  private static final ResourceBundle messages = ResourceBundle.getBundle("gov.loc.repository.bagit.MessageBundle");
   private transient final Path file;
   private transient final Set<Path> missingFiles;
   private transient final CountDownLatch latch;

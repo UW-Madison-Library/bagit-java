@@ -23,7 +23,7 @@ import gov.loc.repository.bagit.util.PathUtils;
  */
 public final class BagWriter {
   private static final Logger logger = LoggerFactory.getLogger(BagWriter.class);
-  private static final ResourceBundle messages = ResourceBundle.getBundle("MessageBundle");
+  private static final ResourceBundle messages = ResourceBundle.getBundle("gov.loc.repository.bagit.MessageBundle");
 
   private BagWriter(){
     //intentionally left empty

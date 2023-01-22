@@ -35,7 +35,7 @@ import gov.loc.repository.bagit.util.PathUtils;
 @SuppressWarnings({"PMD.UseLocaleWithCaseConversions", "PMD.TooManyMethods", "PMD.GodClass"})
 public final class ManifestChecker {
   private static final Logger logger = LoggerFactory.getLogger(ManifestChecker.class);
-  private static final ResourceBundle messages = ResourceBundle.getBundle("MessageBundle");
+  private static final ResourceBundle messages = ResourceBundle.getBundle("gov.loc.repository.bagit.MessageBundle");
   
   private static final String THUMBS_DB_FILE = "[Tt][Hh][Uu][Mm][Bb][Ss]\\.[Dd][Bb]";
   private static final String DS_STORE_FILE = "\\.[Dd][Ss]_[Ss][Tt][Oo][Rr][Ee]";

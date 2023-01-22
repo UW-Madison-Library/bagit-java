@@ -10,7 +10,7 @@ import gov.loc.repository.bagit.exceptions.UnsupportedAlgorithmException;
  */
 public class StandardBagitAlgorithmNameToSupportedAlgorithmMapping
     implements BagitAlgorithmNameToSupportedAlgorithmMapping {
-  private static final ResourceBundle messages = ResourceBundle.getBundle("MessageBundle");
+  private static final ResourceBundle messages = ResourceBundle.getBundle("gov.loc.repository.bagit.MessageBundle");
 
   @Override
   public SupportedAlgorithm getSupportedAlgorithm(final String bagitAlgorithmName) throws UnsupportedAlgorithmException {

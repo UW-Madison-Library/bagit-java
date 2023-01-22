@@ -33,7 +33,7 @@ import gov.loc.repository.bagit.util.PathUtils;
  */
 public class PayloadVerifier implements AutoCloseable{
   private static final Logger logger = LoggerFactory.getLogger(PayloadVerifier.class);
-  private static final ResourceBundle messages = ResourceBundle.getBundle("MessageBundle");
+  private static final ResourceBundle messages = ResourceBundle.getBundle("gov.loc.repository.bagit.MessageBundle");
 
   private transient final BagitAlgorithmNameToSupportedAlgorithmMapping nameMapping;
   private transient final ExecutorService executor;

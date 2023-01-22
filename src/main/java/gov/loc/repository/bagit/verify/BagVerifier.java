@@ -35,7 +35,7 @@ import gov.loc.repository.bagit.hash.StandardBagitAlgorithmNameToSupportedAlgori
  */
 public final class BagVerifier implements AutoCloseable{
   private static final Logger logger = LoggerFactory.getLogger(BagVerifier.class);
-  private static final ResourceBundle messages = ResourceBundle.getBundle("MessageBundle");
+  private static final ResourceBundle messages = ResourceBundle.getBundle("gov.loc.repository.bagit.MessageBundle");
   
   private final PayloadVerifier manifestVerifier;
   private final ExecutorService executor;

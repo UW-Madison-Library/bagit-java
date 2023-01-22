@@ -28,7 +28,7 @@ public final class Hasher {
   private static final Logger logger = LoggerFactory.getLogger(Hasher.class);
   private static final int _64_KB = 1024 * 64;
   private static final int CHUNK_SIZE = _64_KB;
-  private static final ResourceBundle messages = ResourceBundle.getBundle("MessageBundle");
+  private static final ResourceBundle messages = ResourceBundle.getBundle("gov.loc.repository.bagit.MessageBundle");
   
   private Hasher(){
     //intentionally left empty

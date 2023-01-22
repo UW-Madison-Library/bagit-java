@@ -20,7 +20,7 @@ import gov.loc.repository.bagit.util.PathUtils;
  */
 public interface TagFileReader {
   Logger logger = LoggerFactory.getLogger(TagFileReader.class);
-  ResourceBundle messages = ResourceBundle.getBundle("MessageBundle");
+  ResourceBundle messages = ResourceBundle.getBundle("gov.loc.repository.bagit.MessageBundle");
   String ERROR_PREFIX = "Path [";
   
   /*

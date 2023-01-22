@@ -19,7 +19,7 @@ import gov.loc.repository.bagit.domain.FetchItem;
  */
 public final class FetchWriter {
   private static final Logger logger = LoggerFactory.getLogger(FetchWriter.class);
-  private static final ResourceBundle messages = ResourceBundle.getBundle("MessageBundle");
+  private static final ResourceBundle messages = ResourceBundle.getBundle("gov.loc.repository.bagit.MessageBundle");
   
   private FetchWriter(){
     //intentionally left empty

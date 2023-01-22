@@ -46,7 +46,7 @@ import gov.loc.repository.bagit.verify.BagVerifier;
  */
 public final class BagLinter {
   private static final Logger logger = LoggerFactory.getLogger(BagLinter.class);
-  private static final ResourceBundle messages = ResourceBundle.getBundle("MessageBundle");
+  private static final ResourceBundle messages = ResourceBundle.getBundle("gov.loc.repository.bagit.MessageBundle");
   private static final Version VERSION_1_0 = new Version(1,0);
   
   private BagLinter(){

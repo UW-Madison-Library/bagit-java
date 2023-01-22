@@ -23,7 +23,7 @@ import gov.loc.repository.bagit.exceptions.MaliciousPathException;
  */
 public final class FetchReader {
   private static final Logger logger = LoggerFactory.getLogger(FetchReader.class);
-  private static final ResourceBundle messages = ResourceBundle.getBundle("MessageBundle");
+  private static final ResourceBundle messages = ResourceBundle.getBundle("gov.loc.repository.bagit.MessageBundle");
   private static final String FETCH_LINE_REGEX = ".*[ \t]*(\\d*|-)[ \t]*.*";
 
   private FetchReader(){

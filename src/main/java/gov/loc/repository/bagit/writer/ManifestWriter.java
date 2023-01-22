@@ -20,7 +20,7 @@ import gov.loc.repository.bagit.domain.Manifest;
  */
 public final class ManifestWriter{
   private static final Logger logger = LoggerFactory.getLogger(PayloadWriter.class);
-  private static final ResourceBundle messages = ResourceBundle.getBundle("MessageBundle");
+  private static final ResourceBundle messages = ResourceBundle.getBundle("gov.loc.repository.bagit.MessageBundle");
   
   private ManifestWriter(){
     //intentionally left empty

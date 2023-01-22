@@ -23,7 +23,7 @@ import gov.loc.repository.bagit.hash.Hasher;
 @SuppressWarnings("PMD.DoNotUseThreads")
 public class CheckManifestHashesTask implements Runnable {
   private static final Logger logger = LoggerFactory.getLogger(CheckManifestHashesTask.class);
-  private static final ResourceBundle messages = ResourceBundle.getBundle("MessageBundle");
+  private static final ResourceBundle messages = ResourceBundle.getBundle("gov.loc.repository.bagit.MessageBundle");
   
   private transient final Entry<Path, String> entry;
   private transient final CountDownLatch latch;

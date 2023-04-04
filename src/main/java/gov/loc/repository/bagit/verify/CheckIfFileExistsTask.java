@@ -31,11 +31,8 @@ public class CheckIfFileExistsTask implements Runnable {
 
   @Override
   public void run() {
-    final boolean existsNormalized = existsNormalized();
-    final boolean fileExists = Files.exists(file);
-    
-    if(!fileExists){
-      if(existsNormalized){
+    if(!Files.exists(file)){
+      if(existsNormalized()){
         logger.warn(messages.getString("different_normalization_on_filesystem_warning"), file);
       }
       else{

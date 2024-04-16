@@ -24,7 +24,7 @@ public enum BagitWarning {
   MANIFEST_SETS_DIFFER("manifest_file_sets_differ_between_algorithms");
   
   private final String messageBundleKey;
-  private static final ResourceBundle messages = ResourceBundle.getBundle("MessageBundle");
+  private static final ResourceBundle messages = ResourceBundle.getBundle("gov.loc.repository.bagit.MessageBundle");
   
   private BagitWarning(final String reason){
     this.messageBundleKey = reason;

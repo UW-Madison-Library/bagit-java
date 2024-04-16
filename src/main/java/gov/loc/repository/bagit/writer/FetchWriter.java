@@ -8,6 +8,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import gov.loc.repository.bagit.domain.Version;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +19,7 @@ import gov.loc.repository.bagit.domain.FetchItem;
  */
 public final class FetchWriter {
   private static final Logger logger = LoggerFactory.getLogger(FetchWriter.class);
-  private static final ResourceBundle messages = ResourceBundle.getBundle("MessageBundle");
+  private static final ResourceBundle messages = ResourceBundle.getBundle("gov.loc.repository.bagit.MessageBundle");
   
   private FetchWriter(){
     //intentionally left empty
@@ -31,21 +32,22 @@ public final class FetchWriter {
    * @param outputDir the root of the bag
    * @param bagitRootDir the path to the root of the bag
    * @param charsetName the name of the encoding for the file
+   * @param version the bagit version to conform to
    * 
    * @throws IOException if there was a problem writing a file
    */
-  public static void writeFetchFile(final List<FetchItem> itemsToFetch, final Path outputDir, final Path bagitRootDir, final Charset charsetName) throws IOException{
+  public static void writeFetchFile(final List<FetchItem> itemsToFetch, final Path outputDir, final Path bagitRootDir, final Charset charsetName, final Version version) throws IOException{
     logger.debug(messages.getString("writing_fetch_file_to_path"), outputDir);
     final Path fetchFilePath = outputDir.resolve("fetch.txt");
     
     for(final FetchItem item : itemsToFetch){
-      final String line = formatFetchLine(item, bagitRootDir);
+      final String line = formatFetchLine(item, bagitRootDir, version);
       logger.debug(messages.getString("writing_line_to_file"), line, fetchFilePath);
       Files.write(fetchFilePath, line.getBytes(charsetName), StandardOpenOption.APPEND, StandardOpenOption.CREATE);
     }
   }
   
-  private static String formatFetchLine(final FetchItem fetchItem, final Path bagitRootDir){
+  private static String formatFetchLine(final FetchItem fetchItem, final Path bagitRootDir, final Version version){
     final StringBuilder sb = new StringBuilder();
     sb.append(fetchItem.getUrl()).append(' ');
     
@@ -56,7 +58,7 @@ public final class FetchWriter {
       sb.append(fetchItem.getLength()).append(' ');
     }
     
-    sb.append(RelativePathWriter.formatRelativePathString(bagitRootDir, fetchItem.getPath()));
+    sb.append(RelativePathWriter.formatRelativePathString(bagitRootDir, fetchItem.getPath(), version));
       
     return sb.toString();
   }

@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
+import gov.loc.repository.bagit.domain.Version;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -41,7 +42,7 @@ public class FetchReaderTest extends PrivateConstructorTest {
   @Test
   public void testReadFetchWithNoSizeSpecified() throws Exception{
     Path fetchFile = Paths.get(getClass().getClassLoader().getResource("fetchFiles/fetchWithNoSizeSpecified.txt").toURI());
-    List<FetchItem> returnedItems = FetchReader.readFetch(fetchFile, StandardCharsets.UTF_8, fetchFile.getParent());
+    List<FetchItem> returnedItems = FetchReader.readFetch(fetchFile, StandardCharsets.UTF_8, fetchFile.getParent(), Version.VERSION_0_97);
     
     for(FetchItem item : returnedItems){
       Assertions.assertNotNull(item.url);
@@ -56,7 +57,7 @@ public class FetchReaderTest extends PrivateConstructorTest {
   @Test
   public void testReadFetchWithSizeSpecified() throws Exception{
     Path fetchFile = Paths.get(getClass().getClassLoader().getResource("fetchFiles/fetchWithSizeSpecified.txt").toURI());
-    List<FetchItem> returnedItems = FetchReader.readFetch(fetchFile, StandardCharsets.UTF_8, Paths.get("/foo"));
+    List<FetchItem> returnedItems = FetchReader.readFetch(fetchFile, StandardCharsets.UTF_8, Paths.get("/foo"), Version.VERSION_0_97);
     
     for(FetchItem item : returnedItems){
       Assertions.assertNotNull(item.url);
@@ -72,28 +73,28 @@ public class FetchReaderTest extends PrivateConstructorTest {
   public void testReadBlankLinesThrowsException() throws Exception{
     Path fetchFile = Paths.get(getClass().getClassLoader().getResource("fetchFiles/fetchWithBlankLines.txt").toURI());
     Assertions.assertThrows(InvalidBagitFileFormatException.class, 
-        () -> { FetchReader.readFetch(fetchFile, StandardCharsets.UTF_8, Paths.get("/foo")); });
+        () -> { FetchReader.readFetch(fetchFile, StandardCharsets.UTF_8, Paths.get("/foo"), Version.VERSION_0_97); });
   }
   
   @Test
   public void testReadWindowsSpecialDirMaliciousFetchThrowsException() throws Exception{
     Path fetchFile = Paths.get(getClass().getClassLoader().getResource("maliciousFetchFile/windowsSpecialDirectoryName.txt").toURI());
     Assertions.assertThrows(InvalidBagitFileFormatException.class, 
-        () -> { FetchReader.readFetch(fetchFile, StandardCharsets.UTF_8, Paths.get("/foo")); });
+        () -> { FetchReader.readFetch(fetchFile, StandardCharsets.UTF_8, Paths.get("/foo"), Version.VERSION_0_97); });
   }
   
   @Test
   public void testReadUpADirMaliciousFetchThrowsException() throws Exception{
     Path fetchFile = Paths.get(getClass().getClassLoader().getResource("maliciousFetchFile/upAdirectoryReference.txt").toURI());
     Assertions.assertThrows(MaliciousPathException.class, 
-        () -> { FetchReader.readFetch(fetchFile, StandardCharsets.UTF_8, Paths.get("/bar")); });
+        () -> { FetchReader.readFetch(fetchFile, StandardCharsets.UTF_8, Paths.get("/bar"), Version.VERSION_0_97); });
   }
   
   @Test
   public void testReadTildeFetchThrowsException() throws Exception{
     Path fetchFile = Paths.get(getClass().getClassLoader().getResource("maliciousFetchFile/tildeReference.txt").toURI());
     Assertions.assertThrows(MaliciousPathException.class, 
-        () -> { FetchReader.readFetch(fetchFile, StandardCharsets.UTF_8, Paths.get("/bar")); });
+        () -> { FetchReader.readFetch(fetchFile, StandardCharsets.UTF_8, Paths.get("/bar"), Version.VERSION_0_97); });
   }
   
   @Test
@@ -101,7 +102,7 @@ public class FetchReaderTest extends PrivateConstructorTest {
   public void testReadFileUrlMaliciousFetchThrowsException() throws Exception{
     Path fetchFile = Paths.get(getClass().getClassLoader().getResource("maliciousFetchFile/fileUrl.txt").toURI());
     Assertions.assertThrows(MaliciousPathException.class, 
-        () -> { FetchReader.readFetch(fetchFile, StandardCharsets.UTF_8, Paths.get("/bar")); });
+        () -> { FetchReader.readFetch(fetchFile, StandardCharsets.UTF_8, Paths.get("/bar"), Version.VERSION_0_97); });
   }
   
   @Test

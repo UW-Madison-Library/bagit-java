@@ -12,7 +12,7 @@
 ## Description
 The BAGIT LIBRARY is a software library intended to support the creation,
 manipulation, and validation of bags. Its current version is 0.97. It is version aware with the earliest
-supported version being 0.93.
+supported version being 0.93. This also includes an incomplete implementation of the 1.0 spec.
 
 ## Requirements
 * Java 8
@@ -61,7 +61,7 @@ to follow modern Java practices and will require some changes to existing code:
 
 ### Examples of using the new bagit-java library
 
-##### Create a bag from a folder using version 0.97
+##### Create a bag from a folder using (incomplete) version 1.0
 ```java
 Path folder = Paths.get("FolderYouWantToBag");
 StandardSupportedAlgorithms algorithm = StandardSupportedAlgorithms.MD5;

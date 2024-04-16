@@ -40,7 +40,7 @@ import gov.loc.repository.bagit.exceptions.conformance.RequiredTagFileNotPresent
  */
 public final class BagProfileChecker {
   private static final Logger logger = LoggerFactory.getLogger(BagProfileChecker.class);
-  private static final ResourceBundle messages = ResourceBundle.getBundle("MessageBundle");
+  private static final ResourceBundle messages = ResourceBundle.getBundle("gov.loc.repository.bagit.MessageBundle");
 
   private BagProfileChecker(){
     //intentionally left empty

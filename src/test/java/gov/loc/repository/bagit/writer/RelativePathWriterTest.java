@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import gov.loc.repository.bagit.domain.Version;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +22,7 @@ public class RelativePathWriterTest extends PrivateConstructorTest {
     Path child = parent.resolve("bar/ham");
     String expectedRelativePath = "bar/ham" + System.lineSeparator();
     
-    Assertions.assertEquals(expectedRelativePath, RelativePathWriter.formatRelativePathString(parent, child));
+    Assertions.assertEquals(expectedRelativePath, RelativePathWriter.formatRelativePathString(parent, child, Version.VERSION_0_97));
   }
 
   @Test
@@ -30,6 +31,6 @@ public class RelativePathWriterTest extends PrivateConstructorTest {
     Path child = Paths.get("one/two/three").toAbsolutePath();
     String expectedRelativePath = "three" + System.lineSeparator();
 
-    Assertions.assertEquals(expectedRelativePath, RelativePathWriter.formatRelativePathString(parent, child));
+    Assertions.assertEquals(expectedRelativePath, RelativePathWriter.formatRelativePathString(parent, child, Version.VERSION_0_97));
   }
 }

@@ -26,7 +26,7 @@ import gov.loc.repository.bagit.util.PathUtils;
  */
 public final class MandatoryVerifier {
   private static final Logger logger = LoggerFactory.getLogger(MandatoryVerifier.class);
-  private static final ResourceBundle messages = ResourceBundle.getBundle("MessageBundle");
+  private static final ResourceBundle messages = ResourceBundle.getBundle("gov.loc.repository.bagit.MessageBundle");
   
   //@Incubating
   private static final String DOT_BAGIT_DIR_NAME = ".bagit";

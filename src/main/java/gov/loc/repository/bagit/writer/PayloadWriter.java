@@ -23,7 +23,7 @@ import gov.loc.repository.bagit.domain.Version;
 public final class PayloadWriter {
   private static final Logger logger = LoggerFactory.getLogger(PayloadWriter.class);
   private static final Version VERSION_2_0 = new Version(2, 0);
-  private static final ResourceBundle messages = ResourceBundle.getBundle("MessageBundle");
+  private static final ResourceBundle messages = ResourceBundle.getBundle("gov.loc.repository.bagit.MessageBundle");
   
   private PayloadWriter(){
     //intentionally left empty

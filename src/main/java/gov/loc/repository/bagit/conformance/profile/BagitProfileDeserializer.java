@@ -24,7 +24,7 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 public class BagitProfileDeserializer extends StdDeserializer<BagitProfile> {
   private static final long serialVersionUID = 1L;
   private static final Logger logger = LoggerFactory.getLogger(BagitProfileDeserializer.class);
-  private static final ResourceBundle messages = ResourceBundle.getBundle("MessageBundle");
+  private static final ResourceBundle messages = ResourceBundle.getBundle("gov.loc.repository.bagit.MessageBundle");
 
   public BagitProfileDeserializer() {
     this(null);

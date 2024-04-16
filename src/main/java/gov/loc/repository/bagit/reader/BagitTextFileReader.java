@@ -25,7 +25,7 @@ import gov.loc.repository.bagit.exceptions.UnparsableVersionException;
 public final class BagitTextFileReader {
   private static final Logger logger = LoggerFactory.getLogger(BagitTextFileReader.class);
   private static final byte[] BOM = new byte[]{(byte)0xEF, (byte)0xBB, (byte)0xBF};
-  private static final ResourceBundle messages = ResourceBundle.getBundle("MessageBundle");
+  private static final ResourceBundle messages = ResourceBundle.getBundle("gov.loc.repository.bagit.MessageBundle");
   private static final Version VERSION_1_0 = new Version(1, 0);
   private static final String LINE1_REGEX = "(BagIt-Version: )\\d*\\.\\d*";
   private static final String LINE2_REGEX = "(Tag-File-Character-Encoding: )\\S*";
@@ -124,6 +124,6 @@ public final class BagitTextFileReader {
     final int major = Integer.parseInt(parts[0]);
     final int minor = Integer.parseInt(parts[1]);
     
-    return new Version(major, minor);
+    return Version.getVersion(major, minor);
   }
 }

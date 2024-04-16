@@ -14,7 +14,7 @@ import gov.loc.repository.bagit.verify.FileCountAndTotalSizeVistor;
  */
 public final class PathUtils {
   private static final String PAYLOAD_DIR_NAME = "data";
-  
+
   //@Incubating
  private static final String DOT_BAGIT_DIR_NAME = ".bagit";
   
@@ -43,19 +43,30 @@ public final class PathUtils {
   /**
    * as per https://github.com/jkunze/bagitspec/commit/152d42f6298b31a4916ea3f8f644ca4490494070 decode percent encoded filenames
    * @param encoded the encoded filename
-   * @return the decoded filename 
+   * @param version the bagit version to conform to
+   * @return the decoded filename
    */
-  public static String decodeFilname(final String encoded){
-    return encoded.replaceAll("%0A", "\n").replaceAll("%0D", "\r");
+  public static String decodeFilename(final String encoded, final Version version){
+    String decodedPath = encoded.replaceAll("%0A", "\n").replaceAll("%0D", "\r");
+    if (Version.VERSION_1_0.isSameOrOlder(version)) {
+      decodedPath = decodedPath.replaceAll("%25", "%");
+    }
+    return decodedPath;
   }
   
   /**
    * as per https://github.com/jkunze/bagitspec/commit/152d42f6298b31a4916ea3f8f644ca4490494070 encode any new lines or carriage returns
    * @param path the path to encode
+   * @param version the bagit version to conform to
    * @return the encoded filename
    */
-  public static String encodeFilename(final Path path){
-    return path.toString().replaceAll("\n", "%0A").replaceAll("\r", "%0D");
+  public static String encodeFilename(final Path path, final Version version){
+    String encodedPath = path.toString();
+    if (Version.VERSION_1_0.isSameOrOlder(version)) {
+      encodedPath = encodedPath.replaceAll("%", "%25");
+    }
+    encodedPath = encodedPath.replaceAll("\n", "%0A").replaceAll("\r", "%0D");
+    return encodedPath;
   }
   
   /**

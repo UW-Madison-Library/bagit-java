@@ -23,7 +23,7 @@ import gov.loc.repository.bagit.util.PathUtils;
  */
 public final class BagWriter {
   private static final Logger logger = LoggerFactory.getLogger(BagWriter.class);
-  private static final ResourceBundle messages = ResourceBundle.getBundle("MessageBundle");
+  private static final ResourceBundle messages = ResourceBundle.getBundle("gov.loc.repository.bagit.MessageBundle");
 
   private BagWriter(){
     //intentionally left empty
@@ -53,7 +53,7 @@ public final class BagWriter {
     BagitFileWriter.writeBagitFile(bag.getVersion(), bag.getFileEncoding(), bagitDir);
     
     logger.debug(messages.getString("writing_payload_manifests"));
-    ManifestWriter.writePayloadManifests(bag.getPayLoadManifests(), bagitDir, bag.getRootDir(), bag.getFileEncoding());
+    ManifestWriter.writePayloadManifests(bag.getPayLoadManifests(), bagitDir, bag.getRootDir(), bag.getFileEncoding(), bag.getVersion());
 
     if(!bag.getMetadata().isEmpty()){
       logger.debug(messages.getString("writing_bag_metadata"));
@@ -61,14 +61,14 @@ public final class BagWriter {
     }
     if(bag.getItemsToFetch().size() > 0){
       logger.debug(messages.getString("writing_fetch_file"));
-      FetchWriter.writeFetchFile(bag.getItemsToFetch(), bagitDir, bag.getRootDir(), bag.getFileEncoding());
+      FetchWriter.writeFetchFile(bag.getItemsToFetch(), bagitDir, bag.getRootDir(), bag.getFileEncoding(), bag.getVersion());
     }
     if(bag.getTagManifests().size() > 0){
       logger.debug(messages.getString("writing_tag_manifests"));
       writeTagManifestFiles(bag.getTagManifests(), bagitDir, bag.getRootDir());
       final Set<Manifest> updatedTagManifests = updateTagManifests(bag, outputDir);
       bag.setTagManifests(updatedTagManifests);
-      ManifestWriter.writeTagManifests(updatedTagManifests, bagitDir, outputDir, bag.getFileEncoding());
+      ManifestWriter.writeTagManifests(updatedTagManifests, bagitDir, outputDir, bag.getFileEncoding(), bag.getVersion());
     }
   }
   

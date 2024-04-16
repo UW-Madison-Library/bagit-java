@@ -18,7 +18,7 @@ import gov.loc.repository.bagit.util.PathUtils;
  */
 abstract public class AbstractPayloadFileExistsInManifestsVistor extends SimpleFileVisitor<Path> {
   protected static final Logger logger = LoggerFactory.getLogger(AbstractPayloadFileExistsInManifestsVistor.class);
-  protected static final ResourceBundle messages = ResourceBundle.getBundle("MessageBundle");
+  protected static final ResourceBundle messages = ResourceBundle.getBundle("gov.loc.repository.bagit.MessageBundle");
   protected transient final boolean ignoreHiddenFiles;
 
   public AbstractPayloadFileExistsInManifestsVistor(final boolean ignoreHiddenFiles) {

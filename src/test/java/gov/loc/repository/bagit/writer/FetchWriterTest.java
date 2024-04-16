@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import gov.loc.repository.bagit.domain.Version;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -32,7 +33,7 @@ public class FetchWriterTest extends PrivateConstructorTest {
     
     
     Assertions.assertFalse(Files.exists(fetch));
-    FetchWriter.writeFetchFile(itemsToFetch, rootPath, rootPath, StandardCharsets.UTF_8);
+    FetchWriter.writeFetchFile(itemsToFetch, rootPath, rootPath, StandardCharsets.UTF_8, Version.VERSION_0_97);
     Assertions.assertTrue(Files.exists(fetch));
   }
   
@@ -48,7 +49,7 @@ public class FetchWriterTest extends PrivateConstructorTest {
     itemsToFetch.add(new FetchItem(new URL("http://localhost:8989/bags/v0_96/holey-bag/data/test%201.txt"), null, rootPath.resolve("data/test 1.txt")));
     itemsToFetch.add(new FetchItem(new URL("http://localhost:8989/bags/v0_96/holey-bag/data/test2.txt"), null, rootPath.resolve("data/test2.txt")));
     
-    FetchWriter.writeFetchFile(itemsToFetch, rootPath, rootPath, StandardCharsets.UTF_8);
+    FetchWriter.writeFetchFile(itemsToFetch, rootPath, rootPath, StandardCharsets.UTF_8, Version.VERSION_0_97);
     
     List<String> expectedLines = Arrays.asList("http://localhost:8989/bags/v0_96/holey-bag/data/dir1/test3.txt - data/dir1/test3.txt", 
         "http://localhost:8989/bags/v0_96/holey-bag/data/dir2/dir3/test5.txt - data/dir2/dir3/test5.txt", 

@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import gov.loc.repository.bagit.domain.Version;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -34,7 +35,7 @@ public class ManifestWriterTest extends PrivateConstructorTest {
     Path tagManifest = outputDir.resolve("tagmanifest-md5.txt");
     
     Assertions.assertFalse(Files.exists(tagManifest));
-    ManifestWriter.writeTagManifests(tagManifests, outputDir, Paths.get("/foo/bar/ham"), StandardCharsets.UTF_8);
+    ManifestWriter.writeTagManifests(tagManifests, outputDir, Paths.get("/foo/bar/ham"), StandardCharsets.UTF_8, Version.VERSION_0_97);
     Assertions.assertTrue(Files.exists(tagManifest));
   }
   
@@ -48,7 +49,7 @@ public class ManifestWriterTest extends PrivateConstructorTest {
     Path tagManifest = outputDir.resolve("tagmanifest-md5.txt");
     
     Assertions.assertFalse(Files.exists(tagManifest));
-    ManifestWriter.writeTagManifests(tagManifests, outputDir, Paths.get("/foo/bar/ham"), StandardCharsets.UTF_8);
+    ManifestWriter.writeTagManifests(tagManifests, outputDir, Paths.get("/foo/bar/ham"), StandardCharsets.UTF_8, Version.VERSION_0_97);
     
     List<String> lines = Files.readAllLines(tagManifest);
     for(String line : lines){

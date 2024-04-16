@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
  */
 public interface EncodingChecker {
   Logger logger = LoggerFactory.getLogger(EncodingChecker.class);
-  ResourceBundle messages = ResourceBundle.getBundle("MessageBundle");
+  ResourceBundle messages = ResourceBundle.getBundle("gov.loc.repository.bagit.MessageBundle");
   
   /*
    * It is now normal for all files to be UTF-8

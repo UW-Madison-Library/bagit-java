@@ -64,7 +64,7 @@ public final class BagReader {
     
     final Path fetchFile = bagitDir.resolve("fetch.txt");
     if(Files.exists(fetchFile)){
-      bag.getItemsToFetch().addAll(FetchReader.readFetch(fetchFile, bag.getFileEncoding(), bag.getRootDir()));
+      bag.getItemsToFetch().addAll(FetchReader.readFetch(fetchFile, bag.getFileEncoding(), bag.getRootDir(), bag.getVersion()));
     }
     
     return bag;
